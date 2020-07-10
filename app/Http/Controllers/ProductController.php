@@ -37,6 +37,12 @@ class ProductController extends Controller
      */
      public function store(Request $request)
      {
+         // nome 255 caratteri non piu grande,massima lunghezza e fare un require
+         // verifico che il prezzo sia un numero e non sia negativo
+         $request->validate([
+             'name'=> 'required|max:255',
+             'price'=> 'required|numeric|min:0.01'
+         ]);
          $dati = $request->all();
          $nuovo_prodotto = new Product();
          $nuovo_prodotto->fill($dati);
@@ -64,7 +70,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        if($product) {
+            return view('products.edit', compact('product'));
+        }
+        return abort('404');
     }
 
     /**
@@ -76,7 +86,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'price' => 'required|numeric|min:0.01'
+        ]);
+        $dati = $request->all();
+        $product = Product::find($id);
+        if($product) {
+            $product->update($dati);
+        }
+        return redirect()->route('products.index');
     }
 
     /**
@@ -87,6 +106,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        if($product) {
+            $product->delete();
+        }
+        return redirect()->route('products.index');
     }
 }

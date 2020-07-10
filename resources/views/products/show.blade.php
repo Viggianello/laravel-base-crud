@@ -13,6 +13,12 @@
                     <li>Descrizione: {{ $product->description }}</li>
                     <li>Prezzo: {{ $product->price }}</li>
                 </ul>
+
+                <form action="{{ route('products.destroy', ['product' => $product->id]) }}" method="post">
+                    @method('DELETE')
+                    @csrf
+                    <input type="submit" class="btn btn-danger btn-sm" value="Elimina">
+                </form>
             </div>
         </div>
     </div>

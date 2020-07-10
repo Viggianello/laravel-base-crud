@@ -34,13 +34,20 @@
                                     href="{{ route('products.show', ['product' => $prodotto->id]) }}">
                                         Dettagli
                                     </a>
-                                    <a class="btn btn-warning btn-sm" href="#">Modifica</a>
-                                    <a class="btn btn-danger btn-sm" href="#">Elimina</a>
+                                    <a class="btn btn-warning btn-sm" href="{{ route('products.edit', ['product' => $prodotto->id]) }}">
+                                        Modifica
+                                    </a>
+                                    <form action="{{ route('products.destroy', ['product' => $prodotto->id]) }}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="btn btn-danger btn-sm" value="Elimina">
+                                    </form>
+
                                 </td>
                             </tr>
                         @empty
-                            <tr colspan="4">
-                                <td>Non è presente nessun prodotto</td>
+                            <tr>
+                                <td colspan="4">Non è presente nessun prodotto</td>
                             </tr>
                         @endforelse
                     </tbody>
