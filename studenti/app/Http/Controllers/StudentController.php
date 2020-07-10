@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Product;
+use App\Student;
 
-class ProductController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class ProductController extends Controller
      */
      public function index()
      {
-         $prodotti = Product::all();
-         return view('products.index', compact('prodotti'));
-         // return view('products.index', ['prodotti' => $prodotti]);
+         $studenti = Student::all();
+         return view('students.index', compact('studenti'));
+         // return view('students.index', ['studenti' => $studenti]);
      }
 
     /**
@@ -26,7 +26,7 @@ class ProductController extends Controller
      */
      public function create()
      {
-         return view('products.create');
+         return view('students.create');
      }
 
     /**
@@ -41,13 +41,15 @@ class ProductController extends Controller
          // verifico che il prezzo sia un numero e non sia negativo
          $request->validate([
              'name'=> 'required|max:255',
-             'price'=> 'required|numeric|min:0.01'
+             'lastname'=> 'required|max:255',
+             'matricola'=> 'required|max:20',
+             'email'=> 'required|max:30'
          ]);
          $dati = $request->all();
-         $nuovo_prodotto = new Product();
-         $nuovo_prodotto->fill($dati);
-         $nuovo_prodotto->save();
-         return redirect()->route('products.index');
+         $nuovo_studente = new Student();
+         $nuovo_studente->fill($dati);
+         $nuovo_studente->save();
+         return redirect()->route('students.index');
      }
 
     /**
@@ -59,7 +61,7 @@ class ProductController extends Controller
      public function show(Product $product)
      {
          // $product = Product::find($id);
-         return view('products.show', compact('product'));
+         return view('students.show', compact('student'));
      }
 
     /**
@@ -70,9 +72,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        if($product) {
-            return view('products.edit', compact('product'));
+        $student = Student::find($id);
+        if($student) {
+            return view('students.edit', compact('student'));
         }
         return abort('404');
     }
@@ -87,15 +89,17 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'price' => 'required|numeric|min:0.01'
+            'name'=> 'required|max:255',
+            'lastname'=> 'required|max:255',
+            'matricola'=> 'required|max:20',
+            'email'=> 'required|max:30'
         ]);
         $dati = $request->all();
-        $product = Product::find($id);
-        if($product) {
-            $product->update($dati);
+        $student = Student::find($id);
+        if($student) {
+            $student->update($dati);
         }
-        return redirect()->route('products.index');
+        return redirect()->route('students.index');
     }
 
     /**
@@ -106,10 +110,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
-        if($product) {
-            $product->delete();
+        $student = Student::find($id);
+        if($student) {
+            $student->delete();
         }
-        return redirect()->route('products.index');
+        return redirect()->route('students.index');
     }
 }

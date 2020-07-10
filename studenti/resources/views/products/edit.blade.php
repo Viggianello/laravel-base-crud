@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('page-title', 'Modifica prodotto')
+@section('page-title', 'Modifica studente')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="mt-3 mb-3">Modifica prodotto</h1>
+                <h1 class="mt-3 mb-3">Modifica studente</h1>
                 @if ($errors->any())
                    <div class="alert alert-danger">
                        <ul>
@@ -17,27 +17,33 @@
                    </div>
                 @endif
 
-                <form action="{{ route('products.update', ['product' => $product->id]) }}" method="post">
-                    @method('PUT')
+                <form action="{{ route('students.store') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="nome">Nome</label>
-                        <input type="text" name="name" class="form-control" id="nome" placeholder="Nome prodotto" value="{{ old('name', $product->name) }}">
+                        <input type="text" name="name" class="form-control" id="nome" placeholder="Nome studente" value="{{ old('name') }}" required>
                         @error ('name')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="descrizione">Descrizione</label>
-                        <textarea type="text" name="description" class="form-control" id="descrizione" placeholder="Descrizione prodotto">{{ old('description', $product->description) }}</textarea>
-                        @error ('description')
+                        <label for="cognome">Cognome</label>
+                        <input type="text" name="lastname" class="form-control" id="cognome" placeholder="Cognome studente" value="{{ old('lastname') }}" required>
+                        @error ('lastname')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="prezzo">Prezzo</label>
-                        <input type="number" name="price" class="form-control" id="prezzo" placeholder="Prezzo prodotto" value="{{ old('price', $product->price) }}">
-                        @error ('price')
+                        <label for="matricola">Matricola</label>
+                        <input type="text" name="matricola" class="form-control" id="matricola" placeholder="Matricola studente" value="{{ old('matricola') }}" required>
+                        @error ('matricola')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" class="form-control" id="email" placeholder="Email studente" value="{{ old('email') }}" required>
+                        @error ('email')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -46,4 +52,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsections

@@ -8,8 +8,8 @@
       <li class="nav-item {{ Request::route()->getName() == 'home' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('home') }}">Home</a>
       </li>
-      <li class="nav-item {{ strpos(Request::route()->getName(),'products') !== false ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('products.index')}}">Prodotti</a>
+      <li class="nav-item {{ strpos(Request::route()->getName(),'students') !== false ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('students.index')}}">Studenti</a>
       </li>
     </ul>
   </div>

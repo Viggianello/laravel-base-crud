@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('page-title', 'Lista prodotti')
+@section('page-title', 'Lista studenti')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h1 class="mt-3 mb-3">Lista prodotti</h1>
+                    <h1 class="mt-3 mb-3">Lista studenti</h1>
                     <a class="btn btn-primary"
-                    href="{{ route('products.create') }}">
-                        Nuovo prodotto
+                    href="{{ route('students.create') }}">
+                        Nuovo studente
                     </a>
                 </div>
 
@@ -19,25 +19,29 @@
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
-                            <th>Prezzo</th>
+                            <th>Cognome</th>
+                            <th>Matricola</th>
+                            <th>Email</th>
                             <th class="text-right">Azioni</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($prodotti as $prodotto)
+                        @forelse ($studenti as $studente)
                             <tr>
-                                <td>{{ $prodotto->id }}</td>
-                                <td>{{ $prodotto->name }}</td>
-                                <td>{{ $prodotto->price }}</td>
+                                <td>{{ $studente->id }}</td>
+                                <td>{{ $studente->name }}</td>
+                                <td>{{ $studente->lastname }}</td>
+                                <td>{{ $studente->matricola }}</td>
+                                <td>{{ $studente->email }}</td>
                                 <td class="text-right">
                                     <a class="btn btn-info btn-sm"
-                                    href="{{ route('products.show', ['product' => $prodotto->id]) }}">
+                                    href="{{ route('students.show', ['student' => $studente->id]) }}">
                                         Dettagli
                                     </a>
-                                    <a class="btn btn-warning btn-sm" href="{{ route('products.edit', ['product' => $prodotto->id]) }}">
+                                    <a class="btn btn-warning btn-sm" href="{{ route('students.edit', ['student' => $studente->id]) }}">
                                         Modifica
                                     </a>
-                                    <form action="{{ route('products.destroy', ['product' => $prodotto->id]) }}" method="post">
+                                    <form action="{{ route('students.destroy', ['student' => $studente->id]) }}" method="post">
                                         @method('DELETE')
                                         @csrf
                                         <input type="submit" class="btn btn-danger btn-sm" value="Elimina">
