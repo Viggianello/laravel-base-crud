@@ -21,28 +21,28 @@
                     @csrf
                     <div class="form-group">
                         <label for="nome">Nome</label>
-                        <input type="text" name="name" class="form-control" id="nome" placeholder="Nome studente" value="{{ old('name') }}" required>
+                        <input type="text" name="name" class="form-control" id="nome" placeholder="Nome studente" value="{{ old('name',$student->name) }}" required>
                         @error ('name')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="cognome">Cognome</label>
-                        <input type="text" name="lastname" class="form-control" id="cognome" placeholder="Cognome studente" value="{{ old('lastname') }}" required>
+                        <input type="text" name="lastname" class="form-control" id="cognome" placeholder="Cognome studente" value="{{ old('lastname', $student->lastname) }}" required>
                         @error ('lastname')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="matricola">Matricola</label>
-                        <input type="text" name="matricola" class="form-control" id="matricola" placeholder="Matricola studente" value="{{ old('matricola') }}" required>
+                        <input type="text" name="matricola" class="form-control" id="matricola" placeholder="Matricola studente" value="{{ old('matricola', $student->matricola) }}" required>
                         @error ('matricola')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" name="email" class="form-control" id="email" placeholder="Email studente" value="{{ old('email') }}" required>
+                        <input type="text" name="email" class="form-control" id="email" placeholder="Email studente" value="{{ old('email', $student->email) }}" required>
                         @error ('email')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -52,4 +52,4 @@
             </div>
         </div>
     </div>
-@endsections
+@endsection
